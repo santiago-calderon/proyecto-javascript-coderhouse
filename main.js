@@ -1,7 +1,8 @@
 
 
 class propiedad{
-    constructor(zona,tipo,ambientes,metroscuadrados,condicion,disponibilidad){
+    constructor(id,zona,tipo,ambientes,metroscuadrados,condicion,disponibilidad){
+        this.id=id
         this.zona=zona
         this.tipo=tipo
         this.ambientes=ambientes
@@ -15,11 +16,11 @@ class propiedad{
 const propiedades= []
 
 
-let prop1 = new propiedad("caballito","casa",2,35,"alquilar",true)
-let prop2 = new propiedad("devoto","casa",2,30,"alquilar",true)
-let prop3 = new propiedad("flores","departamento",1,20,"compra",false)
-let prop4 = new propiedad("caballito","departamento",4,50,"alquilar",true)
-let prop5 = new propiedad("la boca","departamento",3,42,"compra",false)
+let prop1 = new propiedad(1,"Caballito","casa",2,35,"alquilar",true)
+let prop2 = new propiedad(2,"Devoto","casa",2,30,"alquilar",true)
+let prop3 = new propiedad(3,"Flores","departamento",1,20,"compra",false)
+let prop4 = new propiedad(4,"Caballito","departamento",4,50,"alquilar",true)
+let prop5 = new propiedad(5,"La Boca","departamento",3,42,"compra",false)
 
 propiedades.push(prop1)
 propiedades.push(prop2)
@@ -28,27 +29,70 @@ propiedades.push(prop4)
 propiedades.push(prop5)
 
 
-function agregarPropiedad(){
-    let zona= prompt("En qué zona queda tu propiedad?").toLocaleLowerCase
-    let tipo= prompt("Casa o departamento?").toLocaleLowerCase
-    let cantidadAmbientes = Number(prompt("Cuantos ambientes?"));
-    let metrosCuadrados =Number(prompt("cuantos metros cuadrados?"))
-    let condicion = prompt("La queres vender o alquilar?").toLocaleLowerCase
-    let disponiblidad = confirm("Ya está disponible?")
 
-    let nuevaPropiedad = new propiedad(zona,tipo,cantidadAmbientes,metrosCuadrados,condicion,disponiblidad)
 
-    propiedades.push(nuevaPropiedad)
+
+const loadProps = (array) =>
+{   
+    let cards = document.querySelector('#cards'); 
+
+    for (const propiedad of propiedades)
+    {   
+        let div = document.createElement("div"); // div creation
+        div.innerHTML = 
+        `
+        <div class=" container col-lg-3 col-sm-6">
+        <div class="card mt-5 mr-2" style="width: 18rem;">
+        <div class="card-body  ">
+          <h5 class="card-title">${propiedad.zona}</h5>
+          <h6 class="card-subtitle mb-2 text-muted">Tipo: ${propiedad.tipo}</h6>
+          <h6 class="card-subtitle mb-2 text-muted">Ambientes:${propiedad.ambientes}</h6>
+          <h6 class="card-subtitle mb-2 text-muted">Metros cuadrados:${propiedad.metroscuadrados}</h6>
+          <h6 class="card-subtitle mb-2 text-muted">Condición:${propiedad.condicion}</h6>
+          <div class="flex-nowrap row" >
+          <button type="button" class="btn btn-warning">Consultar</button>  
+          <button type="button" class="btn btn-warning btn-favorites" id="${propiedad.id}">Favoritos</button>
+          </div>
+          </div>
+        </div>
+        `
+        ;
+        cards.appendChild(div);
+    }
 
 }
 
+loadProps(propiedades);
+
+const inputFiltrar = document.querySelector(".filter-search")
+
+function filtrarProductos() { 
+    inputFiltrar.value = inputFiltrar.value
+    if (inputFiltrar.value !== "") {
+        const resultado = propiedades.filter(propiedad => propiedad.zona.includes(inputFiltrar.value))
+              if (resultado.length === 0) {
+                console.clear()
+                console.warn("No se encontraron productos.")
+                loadProps(propiedades)
+              } else {
+                loadProps(resultado)
+              }
+    } else {
+        loadProps(propiedades)
+    }
+}
+
+inputFiltrar.addEventListener("input", filtrarProductos)
+
+
+    /*
 function filtrarPropiedades () {
 
-    let zona = prompt("En qué zona la queres?").toLocaleLowerCase
-    let tipo = prompt("Casa o departamento?").toLocaleLowerCase
-    let cantidadAmbientes = Number(prompt("Cuantos ambientes?"));
-    let metrosCuadrados =Number(prompt("cuantos metros cuadrados?"))
-    let condicion = prompt("Queres comprar o alquilar?").toLocaleLowerCase
+    let zona = ("En qué zona la queres?").toLocaleLowerCase
+    let tipo = ("Casa o departamento?").toLocaleLowerCase
+    let cantidadAmbientes = Number(("Cuantos ambientes?"));
+    let metrosCuadrados =Number(("cuantos metros cuadrados?"))
+    let condicion = ("Queres comprar o alquilar?").toLocaleLowerCase
 
     let filtroPropiedades = propiedades.filter(propiedad=> propiedad.zona === zona && propiedad.tipo === tipo && propiedad.ambientes === cantidadAmbientes && propiedad.metroscuadrados <= metrosCuadrados && propiedad.condicion === condicion && disponibilidad == true)
 
@@ -60,7 +104,7 @@ function filtrarPropiedades () {
         }
 }
 
-let desicionUsuario = prompt("Desea agregar o buscar propiedad?").toLowerCase()
+let desicionUsuario = ("Desea agregar o buscar propiedad?").toLowerCase()
 
 if (desicionUsuario === "agregar"){
     agregarPropiedad()
@@ -68,4 +112,36 @@ if (desicionUsuario === "agregar"){
         filtrarPropiedades()
     }
 
+*/
+/*
+const loadEvents = ()=>
+{
+    let buttons = document.querySelectorAll('.btn-favorites')
 
+    for (const button of buttons ){
+            button.addEventListener("click", ()=>{
+               if 
+
+            })
+
+    }
+
+}
+
+funcion para agregar productos a favoritos, despues la sigo haciendo
+*/
+/*
+function agregarPropiedad(){
+    let zona= ("En qué zona queda tu propiedad?").toLocaleLowerCase
+    let tipo= ("Casa o departamento?").toLocaleLowerCase
+    let cantidadAmbientes = Number(("Cuantos ambientes?"));
+    let metrosCuadrados =Number(("cuantos metros cuadrados?"))
+    let condicion = ("La queres vender o alquilar?").toLocaleLowerCase
+    let disponiblidad = confirm("Ya está disponible?")
+
+    let nuevaPropiedad = new propiedad(zona,tipo,cantidadAmbientes,metrosCuadrados,condicion,disponiblidad)
+
+    propiedades.push(nuevaPropiedad)
+
+}
+*/
