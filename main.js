@@ -38,7 +38,8 @@ const loadProps = (array) =>
 
     for (const propiedad of propiedades)
     {   
-        let div = document.createElement("div"); // div creation
+
+        let div = document.createElement("div"); 
         div.innerHTML = 
         `
         <div class=" container col-lg-3 col-sm-6">
@@ -49,10 +50,8 @@ const loadProps = (array) =>
           <h6 class="card-subtitle mb-2 text-muted">Ambientes:${propiedad.ambientes}</h6>
           <h6 class="card-subtitle mb-2 text-muted">Metros cuadrados:${propiedad.metroscuadrados}</h6>
           <h6 class="card-subtitle mb-2 text-muted">Condición:${propiedad.condicion}</h6>
-          <div class="flex-nowrap row" >
           <button type="button" class="btn btn-warning">Consultar</button>  
           <button type="button" class="btn btn-warning btn-favorites" id="${propiedad.id}">Favoritos</button>
-          </div>
           </div>
         </div>
         `
@@ -62,24 +61,27 @@ const loadProps = (array) =>
 
 }
 
-loadProps(propiedades);
+const clearDiv = () =>
+{   
+    document.querySelector('#cards').innerHTML = ''; 
+}
+
+
+
 
 const inputFiltrar = document.querySelector(".filter-search")
 
 function filtrarProductos() { 
     inputFiltrar.value = inputFiltrar.value
-    if (inputFiltrar.value !== "") {
+    
+    
+
         const resultado = propiedades.filter(propiedad => propiedad.zona.includes(inputFiltrar.value))
-              if (resultado.length === 0) {
-                console.clear()
-                console.warn("No se encontraron productos.")
-                loadProps(propiedades)
-              } else {
-                loadProps(resultado)
-              }
-    } else {
-        loadProps(propiedades)
-    }
+        
+        loadProps()
+        console.log(resultado)
+           
+  
 }
 
 inputFiltrar.addEventListener("input", filtrarProductos)
