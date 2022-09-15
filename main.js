@@ -1,5 +1,3 @@
-
-
 class propiedad{
     constructor(id,zona,tipo,ambientes,metroscuadrados,condicion,disponibilidad){
         this.id=id
@@ -36,7 +34,7 @@ const loadProps = (array) =>
 {   
     let cards = document.querySelector('#cards'); 
 
-    for (const propiedad of propiedades)
+    for (const propiedad of array)
     {   
 
         let div = document.createElement("div"); 
@@ -61,6 +59,8 @@ const loadProps = (array) =>
 
 }
 
+loadProps(propiedades)
+
 const clearDiv = () =>
 {   
     document.querySelector('#cards').innerHTML = ''; 
@@ -77,9 +77,8 @@ function filtrarProductos() {
     
 
         const resultado = propiedades.filter(propiedad => propiedad.zona.includes(inputFiltrar.value))
-        
-        loadProps()
-        console.log(resultado)
+        clearDiv()
+        loadProps(resultado)
            
   
 }
@@ -89,47 +88,35 @@ inputFiltrar.addEventListener("input", filtrarProductos)
 
     /*
 function filtrarPropiedades () {
-
     let zona = ("En qué zona la queres?").toLocaleLowerCase
     let tipo = ("Casa o departamento?").toLocaleLowerCase
     let cantidadAmbientes = Number(("Cuantos ambientes?"));
     let metrosCuadrados =Number(("cuantos metros cuadrados?"))
     let condicion = ("Queres comprar o alquilar?").toLocaleLowerCase
-
     let filtroPropiedades = propiedades.filter(propiedad=> propiedad.zona === zona && propiedad.tipo === tipo && propiedad.ambientes === cantidadAmbientes && propiedad.metroscuadrados <= metrosCuadrados && propiedad.condicion === condicion && disponibilidad == true)
-
     if (filtroPropiedades.length === 0){
         console.log("En este momento no hay propiedades disponibles")
-
     }else{
             console.log(filtroPropiedades) 
         }
 }
-
 let desicionUsuario = ("Desea agregar o buscar propiedad?").toLowerCase()
-
 if (desicionUsuario === "agregar"){
     agregarPropiedad()
     }else{
         filtrarPropiedades()
     }
-
 */
 /*
 const loadEvents = ()=>
 {
     let buttons = document.querySelectorAll('.btn-favorites')
-
     for (const button of buttons ){
             button.addEventListener("click", ()=>{
                if 
-
             })
-
     }
-
 }
-
 funcion para agregar productos a favoritos, despues la sigo haciendo
 */
 /*
@@ -140,10 +127,7 @@ function agregarPropiedad(){
     let metrosCuadrados =Number(("cuantos metros cuadrados?"))
     let condicion = ("La queres vender o alquilar?").toLocaleLowerCase
     let disponiblidad = confirm("Ya está disponible?")
-
     let nuevaPropiedad = new propiedad(zona,tipo,cantidadAmbientes,metrosCuadrados,condicion,disponiblidad)
-
     propiedades.push(nuevaPropiedad)
-
 }
 */
