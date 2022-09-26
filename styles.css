@@ -1,0 +1,47 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.card-title{
+    font-size: 1rem;
+}
+
+.card-body{
+    box-shadow: none;
+    text-align: justify;
+    height: fit-content
+}
+
+.filters__tittle{
+    font-size: large;    
+}
+.form-check-label{
+    font-size: small;
+}
+
+label{
+    margin-right: 30px;
+}
+
+.filters{
+    display:flex;
+    justify-content:space-around;
+    align-items: center;
+}
+
+.category{
+    text-transform:capitalize;
+}
+
+.btn{
+    margin: 0
+}
+
+.btn-link{
+    font-size: 1.5rem;
+    color: #e7e75a;
+    margin: 0;
+    padding: 0;
+}
