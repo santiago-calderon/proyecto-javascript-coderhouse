@@ -81,10 +81,10 @@ const loadPodcast = (array) =>
         ;
         cards.appendChild(div);
     }
-
+    addFavorites()
 }
 
-loadPodcast(podcasts)
+
 
 // FUNCION PARA BUSCAR POR CATEGORIA
 
@@ -114,10 +114,16 @@ filter.addEventListener("input", filterPodcasts)
 // FUNCION PARA AGREGAR UN PODCAST A FAVORITOS
     const favorites = []
 
-    const updateFavorites = () =>{
+    const updateFavorites = (favorites) =>{
         let favsContainer = document.querySelector("#favs")
-        let div = document.createElement("div"); 
-        div.innerHTML += 
+        let container = document.getElementById("favContainer")
+        if (container){
+            favsContainer.innerHTML = ``
+        }
+        for (const podcast of favorites){
+            let div = document.createElement("div")
+            div.setAttribute("id", "favContainer")
+            div.innerHTML = 
         `
         <div class="card mt-5 mr-3" style="width: 18rem;">
         <img src="${podcast.img}" class="card-img-top" alt="...">
@@ -149,6 +155,9 @@ filter.addEventListener("input", filterPodcasts)
 
         `
         favsContainer.appendChild(div)
+        }
+        
+      
     }
 
     const addFavorites = () =>
@@ -156,16 +165,39 @@ filter.addEventListener("input", filterPodcasts)
     let btnFavs = document.querySelectorAll('.btn-link')
     for (const btn of btnFavs){
             btn.addEventListener ("click", () =>{
-                const pod = podcasts.find(podcast => podcast.id == btn.id)
-                if(pod){
-                    favorites.push(pod)
-                    updateFavorites(favorites)
+                //debugger
+                let found = favorites.find(element => element.id == btn.id);
+                if (found){
+                    
+               
                 }
+                else{let  pod = podcasts.find(element => element.id == btn.id)
+                    if(pod){
+                        let newPodcast = {
+                            id:pod.id,
+                            name: pod.name,
+                            category: pod.category,
+                            description: pod.description,
+                            img: pod.img,
+                            apple:pod.apple,
+                            spotify:pod.spotify,
+                            rating:pod.rating,
+                            quantity: 1
+                        }
+                        favorites.push(newPodcast)
+                       
+                    }}
+                
+                
+                updateFavorites(favorites)
             })
+  
         }
+        
     }
+    
 
-    addFavorites()
+    loadPodcast(podcasts)
    
 
 
@@ -200,7 +232,7 @@ const loadEvents = ()=>
             })
     }
 }
-funcion para agregar productos a favoritos, despues la sigo haciendo
+funcion para agregar podcastos a favoritos, despues la sigo haciendo
 */
 /*
 function agregarPropiedad(){
