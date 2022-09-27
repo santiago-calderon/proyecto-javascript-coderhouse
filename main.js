@@ -133,7 +133,7 @@ filter.addEventListener("input", filterPodcasts)
                 <a class="btn btn-warning" data-toggle="collapse" href="#collapse${podcast.id}" role="button" aria-expanded="false" aria-controls="collapse${podcast.id}">
                     Description
                 </a>
-                <button id="${podcast.id}" type="button" class="btn btn-link"><i class="fa-solid fa-star"></i></button>
+                <button id="${podcast.id}" onclick="deleteFavs()" type="button" class="btn btn-outline-danger btn-dlt"><i class="fa-sharp fa-solid fa-trash"></i></button>
            </p>
                 <div class="collapse" id="collapse${podcast.id}">
                 <div class="card card-body">
@@ -199,7 +199,19 @@ filter.addEventListener("input", filterPodcasts)
 
     loadPodcast(podcasts)
    
+// AGREGAR POSCAST A FAVORITOS
 
+const dlt = []
+
+const deleteFavs = () =>{
+    let btnDlt = document.querySelectorAll(".btn-dlt")
+    for (const btn of btnDlt){
+        let found = favorites.found(element => element.id == btn.id)
+        dlt = favorites.filter((item) => item !== found)
+        favorites=dlt       
+    }
+    updateFavorites (favorites)
+}
 
     /*
 function filtrarPropiedades () {
