@@ -112,7 +112,7 @@ filter.addEventListener("input", filterPodcasts)
 //------------------------------------------------------------
 
 // FUNCION PARA AGREGAR UN PODCAST A FAVORITOS
-    const favorites = []
+    let  favorites = []
 
     const updateFavorites = (array) =>{
         let favsContainer = document.querySelector("#favs")
@@ -208,9 +208,9 @@ const deleteFavs = () =>{
     for (const btn of btnDlt){
         let found = favorites.find(pod => pod.id == btn.id)
         dlt = favorites.filter(element => element.id === found)
-       
+       favorites = dlt
     }
-    updateFavorites (dlt)
+    updateFavorites (favorites)
 }
 
     /*
