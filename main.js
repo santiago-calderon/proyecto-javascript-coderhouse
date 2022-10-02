@@ -160,6 +160,10 @@ filter.addEventListener("input", filterPodcasts)
       
     }
 
+    const saveInLocalStorage = (key, value) => {
+        localStorage.setItem(key, JSON.stringify(value))
+    } 
+
     const addFavorites = () =>
     {
     let btnFavs = document.querySelectorAll('.btn-link')
@@ -168,7 +172,22 @@ filter.addEventListener("input", filterPodcasts)
                 //debugger
                 let found = favorites.find(element => element.id == btn.id);
                 if (found){
-                    
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 3000,
+                        timerProgressBar: true,
+                        didOpen: (toast) => {
+                          toast.addEventListener('mouseenter', Swal.stopTimer)
+                          toast.addEventListener('mouseleave', Swal.resumeTimer)
+                        }
+                      })
+                      
+                      Toast.fire({
+                        icon: 'error',
+                        title: 'Este podcast ya está en favoritos'
+                      })
                
                 }
                 else{let  pod = podcasts.find(element => element.id == btn.id)
@@ -185,10 +204,25 @@ filter.addEventListener("input", filterPodcasts)
                             quantity: 1
                         }
                         favorites.push(newPodcast)
-                       
+                        const Toast = Swal.mixin({
+                            toast: true,
+                            position: 'top-end',
+                            showConfirmButton: false,
+                            timer: 3000,
+                            timerProgressBar: true,
+                            didOpen: (toast) => {
+                              toast.addEventListener('mouseenter', Swal.stopTimer)
+                              toast.addEventListener('mouseleave', Swal.resumeTimer)
+                            }
+                          })
+                          
+                          Toast.fire({
+                            icon: 'success',
+                            title:  pod.name + " agregado a favoritos"
+                          })
                     }}
                 
-                
+                saveInLocalStorage("favorites", favorites)
                 updateFavorites(favorites)
             })
   
@@ -210,9 +244,20 @@ const deleteFavs = () =>{
         dlt = favorites.filter(element => element.id === found)
        favorites = dlt
     }
+    saveInLocalStorage("favorites", favorites)
     updateFavorites (favorites)
 }
 
+function recoveryFavs() {
+    let favsRecovery = JSON.parse(localStorage.getItem("favorites"))
+    favsRecovery.forEach((podcast) => {
+        favorites.push(podcast)
+    });
+    updateFavorites(favorites)
+    console.log(favorites);
+
+}
+recoveryFavs()
     /*
 function filtrarPropiedades () {
     let zona = ("En qué zona la queres?").toLocaleLowerCase
