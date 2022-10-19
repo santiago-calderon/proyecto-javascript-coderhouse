@@ -11,6 +11,7 @@
     <script src="./Bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="./Bootstrap/js/mdb.min.js"></script>
     <script src="https://kit.fontawesome.com/40aa64c22e.js" crossorigin="anonymous"></script>
+    <script defer src="./apiQuotes.js"></script>
     <script defer src="./main.js" ></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <title>Document</title>
@@ -43,7 +44,17 @@
         </div>
       </div>
       
-      
+      <section class="quotes container">
+        <blockquote class="pl-3 pr-3 blockquote border border-secondary d-flex flex-column">
+          <h3 class="text-center">User comments</h3>
+          <p class="mb-0" id="quotes"></p>
+          <small class="blockquote-footer text-right" id="quotesAuthor">Author</small>
+          <button id="btnQuotes" class="btn-warning btn-sm align-self-center">
+            New Comment
+          </button>
+        </blockquote>
+
+      </section>
 
       <div id="cards" class="container d-flex justify-content-around align-content-center flex-wrap" >
         
